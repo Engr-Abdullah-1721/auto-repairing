@@ -1,0 +1,2 @@
+mongodb+srv://mongodbuser:<password>@cluster0.qpmht.mongodb.net/<dbname>?retryWrites=true&w=majority
+mongodb+srv://abdullah:097vehicle@cluster1.toux6.mongodb.net/vehicle-repairing?retryWrites=true&w=majority
