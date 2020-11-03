@@ -1,3 +1,4 @@
+require('dotenv').config()
 require('./models/db');
 const express=require('express');
 const mongoose=require('mongoose');
@@ -29,9 +30,9 @@ app.engine('hbs',expressHandlebars({
 
 
 app.set('view engine','hbs');//successfully configured handlebars
-
-app.listen(5000,()=>{
-    console.log('hey your server is running at port 5000');
+const port = process.env.PORT || 3000;
+app.listen(port,()=>{
+    console.log('hey your server is running at port 3000');
 });
 
 app.use('/worker',workerController);

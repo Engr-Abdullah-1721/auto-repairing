@@ -7,6 +7,8 @@ const clients=mongoose.model('clients');
 //session
 router.use(session({
     key:"worker",
+    resave: true,
+    saveUninitialized: true,
     secret:"any random string",
 }));//session
 router.get('/',(req,res)=>{

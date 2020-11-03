@@ -1,7 +1,7 @@
 const mongoose=require('mongoose');
 const url="mongodb://localhost:27017/WORKSHOP1";
 
-mongoose.connect(url,{useNewUrlParser:true},(err)=>{
+mongoose.connect(process.env.MONGODB_URI || url,{useNewUrlParser:true},(err)=>{
     if(!err){
         console.log("WORKSHOP1 successfully connected");
     }

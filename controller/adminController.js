@@ -9,6 +9,8 @@ var session=require('express-session');
 //session
 router.use(session({
     key:"admin",
+    resave: true,
+    saveUninitialized: true,
     secret:"any random string",
 }));//session
 
