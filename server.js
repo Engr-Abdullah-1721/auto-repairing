@@ -35,6 +35,6 @@ app.listen(port,()=>{
     console.log('hey your server is running at port 3000');
 });
 
-app.use('/worker',workerController);
-app.use('/admin',adminController);
-app.use('',userController);
+app.use('/worker/',workerController);
+app.use('/admin/',adminController);
+app.use('/home',userController);
