@@ -1,0 +1,95 @@
+<div class="col-md-4" style="text-align:center;box-shadow: 2px 2px 12px 2px rgb(87, 255, 171);margin-bottom:50px;">
+        <a href="/worker/logout" class="btn btn-sm btn-danger" style="float:left;">Logout</a>
+        <br>
+        <h3>Name : {{worker.workerName}}</h3>
+        <br>
+        <h3>Phone : {{worker.phone}}</h3>
+        <br>
+        <br>
+</div>
+
+<div class="modal" id="mapModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <div id="map" style="width:90%;height:300px;border-radius:10px;"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped" style="font-weight: bold;font-size:20px;">
+    <thead>
+        <tr style="box-shadow: 2px 2px 12px 2px rgb(87, 255, 171);">
+            <th></th>
+            <th>Client Name</th>
+            <th>Client Phone</th>
+            <th></th>
+            <th><a href="#mapModal" data-toggle="modal" class="btn btn-primary"><i class="fa fa-map"></i></a></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each clients}}
+        {{!-- script for client tracker map --}}
+        
+        <tr>
+            <td></td>
+            <td>{{this.clientName}}</td>
+            <td>{{this.phone}}</td>
+            <td>
+                {{#if this.complete }}
+                    <button class="btn btn-primary disabled">completed</button>
+                {{else}}
+                <form onsubmit="return complet(this);" method="POST">
+                    <input type="hidden" name="_id" value="{{this._id}}" id="_id">
+                    <input type="hidden" name="complete" id="complete">
+                    <input type="submit" value="complete" class="btn btn-success">
+                </form>
+                {{/if}}
+            </td>
+            <td></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script>
+    function complet(form){
+    $.ajax({
+        data:{},
+        success:function(response){
+            if(response != ""){
+                window.location.href="/worker/{{worker._id}}/dash";
+            }
+        }
+    })}
+</script>
+
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: {{worker.location.lat}}, lng: {{worker.location.lng}} 
+          },
+          zoom: 16,
+        });
+        var marker=new google.maps.Marker({
+            position:{lat:{{worker.location.lat}},lng:{{worker.location.lng}} 
+            },
+            map:map,
+            title:"{{worker.workerName}}",
+        });
+        var clientIcon="http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        {{#each clients}}
+        var marker=new google.maps.Marker({
+            position:{lat:{{this.location.lat}},lng:{{this.location.lng}} 
+            },
+            map:map,
+            title:"{{this.clientName}}",
+            icon:clientIcon,
+        });
+        {{/each}}
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rLOFm41gKqczz5FMowPRrdtGsXW8bKM&callback=initMap"></script>

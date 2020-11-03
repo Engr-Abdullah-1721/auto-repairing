@@ -1,0 +1,28 @@
+<div class="row"><h4 class="col-md-12"><a class="btn btn-sm btn-success" href="/admin/dashboard">Clients List</a><a class="btn btn-sm btn-success ml-4" href="/admin/dashboard/addWorker">Add worker</a><a href="/admin/logout" style="float: right;" class="btn btn-sm btn-danger">Admin Logout</a></h4></div>
+<table class="table table-striped" style="font-weight: bold;font-size:20px;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Mechanic Name</th>
+            <th>Mechanic Phone</th>
+            <th>Mechanic Type</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each workers}}
+        <tr>
+            <td></td>
+            <td><a href="/admin/dashboard/workersList/{{this.id}}">{{this.workerName}}</a></td>
+            <td>{{this.phone}}</td>
+            <td>
+                {{this.type}}
+            </td>
+            <td>
+                <a href="/admin/dashboard/workersList/{{this.id}}/delete" onclick="return confirm('Are you sure you want to delete this Worker ?')" class="btn btn-outline-danger">Delete</a>
+            </td>
+            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

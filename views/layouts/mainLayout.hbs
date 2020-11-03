@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>OnlineWorkShop</title>
+    <script src="/style/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/style/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/style/font/css/all.min.css">
+    <script src="/style/js/bootstrap.min.js"></script>
+
+    <style>
+        html,body{
+            height:100%;
+            width:100%;
+            margin: 0;
+            padding: 0;
+        }
+        #showcase-inner{
+        background:url('/images/slider2.png') no-repeat top center fixed;
+        position:relative;
+        height: 600px;
+        overflow: hidden;
+        padding-top:8rem;
+        }
+
+        #showcase-inner .service-search{
+        min-height: 300px;
+        position: relative;
+        border-radius: 5px;
+        }
+        #showcase-inner .overlay{
+        content:'';
+        position:absolute;
+        top:80px;
+        left:0;
+        min-height: 300px;
+        width: 100%;
+        background: rgba(51, 51, 51, 0.8);
+        }
+        @media screen and (max-width: 600px) {
+        #showcase-inner{
+                height:700px;
+            }
+        }
+        #showcase-inner .overlay .hh1{
+        font-size:2em;
+        }
+        nav{
+        box-shadow: 2px 4px 7px gray;
+        background: rgb(4, 240, 177);
+        }
+        .pikaColor{
+        background: rgba(4, 240, 177, 0.335);
+        }
+        .shohColor{
+        background: rgb(4, 240, 177);
+        }
+        #footer-top{
+        background:url('/images/hd1/bg1.jpg') no-repeat top center fixed;
+        background-position-y: center;
+        width: 100%;
+        min-height: 400px;
+        }
+        
+        #map{
+            height:50%;
+            width: 40%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <!-- navbar -->
+    <nav class="navbar navbar-light navbar-expand-md fixed-top">
+        <div class="container">
+            <a href="/" class="navbar-brand" style="font-weight: bold; font-size:20px; ">
+            <img width="50" src="/images/logo.png" alt="Logo">
+            </a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navbar1">
+                <i class="navbar-toggler-icon"></i>
+            </button>
+            <div id="navbar1" class="collapse navbar-collapse">
+                <span class="mr-auto"></span>
+            <ul class="nav navbar-nav" style="font-weight:bold;text-align:center;font-size:18px;">
+                <li><a href="/worker" class="nav-link">Worker</a></li>
+                <li><a href="/about" class="nav-link">About</a></li>
+            </ul>
+            </div>
+        </div>
+    </nav>
+    <!--populate the child views -->
+    <div style="margin-top:150px;min-height:550px;">
+     {{{body}}}
+    </div>
+
+    <footer class="footer p-3 text-center" style="background: rgb(4, 240, 177); margin-bottom:0;">
+        <h5>All &copy; Copyright Reserved by Sultan bhai </h5>
+    </footer>
+</div>
+    <script>
+    $(window).on('scroll',function(){
+        if($(window).scrollTop() > 100 ){
+            $('nav').removeClass('shohColor');
+            $('nav').addClass('pikaColor');            
+        }
+        else{
+            $('nav').addClass('shohColor');
+        }
+        });
+    </script>	
+</body>
+</html>

@@ -1,0 +1,31 @@
+<div class="row"><h4 class="col-md-12"><a class="btn btn-sm btn-success" href="/admin/dashboard/workersList">Workers List</a><a href="/admin/logout" style="float: right;" class="btn btn-sm btn-danger">Admin Logout</a></h4></div>
+<table class="table table-striped" style="font-weight: bold;font-size:20px;">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Client Name</th>
+            <th>Client Phone</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each clients}}
+        <tr>
+            <td></td>
+            <td><a href="/admin/dashboard/{{this._id}}">{{this.clientName}}</a></td>
+            <td>{{this.phone}}</td>
+            <td>
+                {{#if this.complete}}
+                    <img width="50" src="/images/responseok.png">
+                {{else}}
+                <img width="50" src="/images/{{#if this.response}}responseok1.png{{else}}response.png{{/if}}">
+                {{/if}}
+            </td>
+            <td>
+                <a href="/admin/dashboard/{{this.id}}/delete" onclick="return confirm('Are you sure you want to delete this client ?')" class="btn btn-outline-danger">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

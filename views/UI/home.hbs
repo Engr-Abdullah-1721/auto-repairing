@@ -1,0 +1,116 @@
+<h3>{{viewTitle}}</h3>
+<script>
+	var result=document.getElementById('result');
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(getLocation,getError);
+	}
+	else{
+		result.innerHTML="Sorry Your Browser Doesn't Support"
+	}
+	function getLocation(location){
+		var lat=location.coords.latitude;
+		var lng=location.coords.longitude;
+		var lat1=document.getElementById('lat');
+		lat1.value=lat;
+		var lng1=document.getElementById('lng');
+		lng1.value=lng;
+	}
+	function getError(error){
+		result.innerHTML=error.message;
+	}
+
+</script>
+
+
+<section style="margin-top:-150px;" id="showcase-inner" class="py-5 text-white">
+    <div class="container text-center text-white col-md-12">
+        <div class="service-search p-5">
+            <div class="overlay px-5">
+                <div class="search mt-2">  
+                    <h2 class="col-md-12" id="result"> Online Vehicle Repairing Service</h2>
+                  
+                   {{#if error }}	
+                        <div class="alert alert-danger">
+                        <h4>{{error}}</h4>
+                        </div>
+                    {{/if}}
+                    <form class="form mt-4" action="/" method="POST" autocomplete="off">
+                        <h5 id="result"></h5>
+                        <input type="hidden" name="_id" value="{{client._id}}">
+                        <input type="hidden" name="lat" id="lat">
+                        <input type="hidden" name="lng" id="lng">
+                        <div class="form-row justify-content-center">
+                            <div class="col-md-3 mb-3">
+                                <input type="text" name="clientName" value="{{client.clientName}}"  class="form-control" placeholder="Full Name">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <input type="number" name="phone" class="form-control" value="{{client.phone}}" placeholder="Phone Number">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <textarea name="carCondition" cols="10" rows="1" class="form-control" placeholder="Vehicle Condition">{{client.carCondition}}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-row justify-content-center">
+                            <div class="col-md-3 mb-3">
+                                <input type="number" name="cnic" class="form-control" value="{{client.cnic}}" placeholder="CNIC   **optional">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <input type="number" name="vehicleNumber" class="form-control" value="{{client.vehicleNumber}}" placeholder="Vehicle Number / Engine Number">
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <select required="required" name="carType" class="form-control">
+                                    <option value="Car">Car</option>
+                                    <option value="Jeep">Jeep</option>
+                                    <option value="Vegan">Vegan</option>
+                                    <option value="Coaster">Coaster</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row justify-content-center">
+                            <div class="col-md-2"> 
+                                <button type="submit" class="btn btn-success btn-block">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<h1 class="display-5 text-center mt-5 p-5" >Just Fill Out the form Click on Submit<br> We Will arrived Just in few minutes</h1>
+
+        
+<div class="row col-md-12">
+    {{#each workers}}
+    <div style="margin-left:100px;" class="card mt-5 col-lg-3 col-md-6 px-0 text-center">
+            
+        <img src="/images/hd1/slider1.jpg" alt="{{this.workerName}}" class="img-fluid">
+        <div class="card-body">
+        <h3>{{this.workerName}}</h3>
+        <p class="text-primary"><i class="fa fa-phone"></i> {{this.phone}}<br> Work Will And Fast</p>
+    </div>
+        <a href="/worker/{{this._id}}" class="btn btn-info">More Detail</a>
+    </div>
+    {{/each}}
+</div>
+
+<section id="footer-top" class="mt-5">
+    <div class="row text-center text-white p-5">
+        <div class="col-md-4 mt-5">
+            <i style="text-shadow: 2px 2px 6px black;" class="fa fa-map fa-5x"></i>
+            <hr/>
+            <h2 style="text-shadow: 2px 2px 6px black;">Tour Information Service</h2>
+        </div>
+        <div class="col-md-4 mt-5">
+            <i style="text-shadow: 2px 2px 6px black;" class="fa fa-car fa-5x"></i>
+            <hr/>
+            <h2 style="text-shadow: 2px 2px 6px black;">Garage ServiceFree<br/> Oil Change Service</h2>
+        </div>
+        <div class="col-md-4 mt-5">
+            <i style="text-shadow: 2px 2px 6px black;" class="fa fa-paint-brush fa-5x"></i>
+            <hr/>
+            <h2 style="text-shadow: 2px 2px 6px black;">Paint , Repair Tir Change </h2>
+        </div>
+    </div>
+</section>

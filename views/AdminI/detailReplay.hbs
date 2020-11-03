@@ -1,0 +1,62 @@
+<div class="row">
+    <div class="col-md-6">
+        <div id="map" style="width:90%;height:100%;border-radius:10px;"></div>
+    </div>
+    <div class="col-md-6">
+        <h2>Name : {{client.clientName}}</h2>
+        <h2>Phone : {{client.phone}}</h2>
+        <h3>CNIC : {{client.cnic}}</h3>
+        <h2>Vehicle Number : {{client.vehicleNumber}}</h2>
+        <h2>Car Type : {{client.carType}}</h2>
+        <form action="/admin/dashboard/{{client._id}}" method="POST" style="margin-top:120px;">
+            <div class="form-group"><input type="hidden" name="_id" value="{{client._id}}"></div>
+            <div class="form-group">
+                <h4>{{client.worker}}</h4>
+              <select name="worker" id="worker" class="form-control">
+                  <option value=""></option>
+                {{#each workers}}
+                    <option value="{{this.workerName}}">{{this.workerName}}</option>
+                {{/each}}
+            </select>
+            </div>
+            <div class="form-group">
+                <input type="text" name="response" class="form-control" value="{{client.response}}" id="response" placeholder="Reply">
+            </div>
+            <input type="submit" value="Reply" class="btn btn-block btn-success">
+        </form>
+        <br>
+        <a href="/admin/dashboard/" class="btn btn-primary">Back to Clients List</a>
+    </div>
+</div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: {{client.location.lat}}, lng: {{client.location.lng}} 
+          },
+          zoom: 16,
+        });
+        var marker=new google.maps.Marker({
+            position:{lat:{{client.location.lat}},lng:{{client.location.lng}} 
+            },
+            map:map,
+            title:"{{client.clientName}}",
+        });
+        var workerIcon="http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        {{#each workers}}
+        var pos2={
+          lat:{{this.location.lat}},
+          lng:{{this.location.lng}}
+        }
+        var marker = new google.maps.Marker({
+          position: pos2,
+          map: map,
+          title:"{{this.workerName}}",
+          icon:workerIcon,
+        });
+
+            
+        {{/each}}
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rLOFm41gKqczz5FMowPRrdtGsXW8bKM&callback=initMap"></script>

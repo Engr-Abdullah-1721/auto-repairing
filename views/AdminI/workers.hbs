@@ -1,0 +1,112 @@
+<script>
+	var result=document.getElementById('result');
+	if(navigator.geolocation){
+		navigator.geolocation.getCurrentPosition(getLocation,getError);
+	}
+	else{
+		result.innerHTML="Sorry Your Browser Doesn't Support"
+	}
+	function getLocation(location){
+		var lat=location.coords.latitude;
+		var lng=location.coords.longitude;
+		var lat1=document.getElementById('lat');
+		lat1.value=lat;
+		var lng1=document.getElementById('lng');
+		lng1.value=lng;
+	}
+	function getError(error){
+		result.innerHTML=error.message;
+	}
+</script>
+
+<div class="row">
+	<div class="col-md-4 p-5" style="font-weight:bold;box-shadow:0px 2px 14px 6px rgb(96, 246, 176);margin-left:200px;border-radius:10px;">
+		<form style="" class="form" action="/admin/dashboard/addWorker" method='POST'>
+				<input type="hidden" value="{{worker._id}}" id="_id" name="_id">
+			<div class="form-group">
+				<label for="workerName">Mechanic Name</label>
+				<input type="text" value="{{worker.workerName}}" name="workerName" class="form-control" id="workerName" placeholder="Worker Name">
+			</div>
+			<div class="form-group">
+				<label for="type">Mechanic Type</label>
+				<select class="form-control">
+					<option value="{{worker.type}}">{{worker.type}}</option>
+					<option value="Car Painter">Car Painter</option>
+					<option value="Large Vehicle Mechanic">large Vehicle Mechanic</option>
+					<option value="Body Maker">Body Maker</option>
+					<option value="other">other</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="password">password</label>
+				<input type="password" value="{{worker.password}}" name="password" class="form-control" placeholder="Password" id="password">
+			</div>
+			<div class="form-group">
+				<label for="phone">Phone Number</label>
+				<input type="text" value="{{worker.phone}}" name="phone" class="form-control" placeholder="Phone Number" id="phone">
+			</div>
+
+			<div class="form-row">
+			</div>
+			<br/>
+			<div class="form-row">
+				<div class="col-md-6">
+				<input type="text" class="form-control" name="lat" id="lat" value="{{worker.location.lat}}">
+			</div>
+			<div class="col-md-6">
+				<input type="text" class="form-control" name="lng" id="lng" value="{{worker.location.lng}}">
+			</div>	
+			</div>
+			<br/>
+			<div class="form-group">
+				<button type="submit" class="btn btn-success btn-block" style="font-weight: bold;">Add Worker</button>
+			</div>
+		</form>
+	</div>
+    <!--for map-->
+    <div class="col-md-4 p-5" style="font-weight:bold;box-shadow:0px 2px 14px 6px rgb(96, 246, 176);margin-left:200px;border-radius:10px;">
+    <div id="map" style="width:90%;height:100%;border-radius:10px;"></div>
+	</div>
+</div>
+
+<script>
+	var map;
+		function initMap() {
+			map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: {{worker.location.lat}}, lng: {{worker.location.lng}} 
+			},
+			zoom: 15,
+			});
+			var marker=new google.maps.Marker({
+				position:{lat:{{worker.location.lat}},lng:{{worker.location.lng}} 
+				},
+				map:map,
+				title:"{{worker.workerName}}",
+			});
+		}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3rLOFm41gKqczz5FMowPRrdtGsXW8bKM&callback=initMap"></script>
+
+{{!-- 
+
+		<script>
+			function doLogin(form){
+				$.ajax({
+					url:'/admin',
+					method:'POST',
+					data:{username:form.username.value,password:form.password.value},
+					success:function(response){
+						if(response==""){
+							alert('Wrong Credentials');
+						}
+						else{
+							alert('You are Successfully logged In');
+							window.location.href="/admin/dashboard/";
+						}
+					}
+				});
+				return false;
+			}
+		</script>
+
+ --}}

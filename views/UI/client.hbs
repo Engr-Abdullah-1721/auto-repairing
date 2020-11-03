@@ -1,0 +1,42 @@
+<title>client</title>
+<h2 class="text-center">{{client.clientName}} Welcome!</h2>
+
+{{#if client.response}}
+    <div class="alert alert-success">
+        {{#if client.worker}}
+            <h5 class="text-center">Our worker '{{client.worker}}' is on the way plz wait for </h5>
+            <h4>{{client.worker.phone}}</h4>
+            
+            <form class="form" action="/{{client._id}}" method="POST" autocomplete="off">
+                <h5 id="result"></h5>
+                <input type="hidden" value={{client._id}} name="client"  class="form-control" >
+                <input type="hidden" name="worker" value={{client.worker}}  class="form-control" >
+                <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                        <label class="sr-only">Comment</label>
+                        <input type="text" name="comment"  class="form-control" placeholder="What's your Opinion about this Worker?">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="sr-only">Review</label>
+                        <input type="number" max=5 min=1 name="review" class="form-control" placeholder="Review out of 5 Star">
+                    </div>
+                </div>
+                <div class="form-row justify-content-center">
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary btn-block">Review</button>
+                    </div>
+                </div>
+            </form>
+        {{/if}}
+        <h3 class="text-center mt-5">{{client.response}}</h3>
+    </div>
+    <h4 class="text-center"><a href="/about"><i class="fa fa-question-circle"></i> For Any Help</a></h4>
+{{else}}
+    <script>
+        setTimeout(function(){
+        window.location.reload(1);
+        },5000);
+    </script>
+    <h3 class="text-center bg-info">Wait for response message please</h3>
+{{/if}}
+
