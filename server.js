@@ -37,4 +37,4 @@ app.listen(port,()=>{
 
 app.use('/worker',workerController);
 app.use('/admin',adminController);
-app.use('/',userController);
+app.use('',userController);

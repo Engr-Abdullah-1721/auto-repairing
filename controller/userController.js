@@ -5,7 +5,7 @@ const workerModel=mongoose.model('workers');
 const reviewModel=mongoose.model('reviews');
 const router=express.Router();
 
-router.get('/',function(req,res){
+router.get('',function(req,res){
     workerModel.find((err,doc)=>{
         if(!err){
           res.render('UI/home',({
@@ -15,7 +15,7 @@ router.get('/',function(req,res){
     })
     
 });
-router.post('/',function(req,res){
+router.post('',function(req,res){
     forInsertion(req,res);
     
 });
